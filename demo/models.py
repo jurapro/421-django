@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import FileExtensionValidator
 from django.db import models
+from django.urls import reverse
 from django.utils.crypto import get_random_string
 
 
@@ -29,6 +30,8 @@ class User(AbstractUser):
 
 def get_name_file(instance, filename):
     return '/'.join([get_random_string(length=5) + '_' + filename])
+
+
 class Product(models.Model):
     name = models.CharField(max_length=254, verbose_name='Имя', blank=False)
     date = models.DateTimeField(verbose_name='Дата добавления', auto_now_add=True)
@@ -44,6 +47,13 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('product', args=[str(self.id)])
+
+    def __str__(self):
+        return self.name
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=254, verbose_name='Наименование', blank=False)
 
     def __str__(self):
         return self.name
