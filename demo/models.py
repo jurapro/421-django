@@ -1,5 +1,7 @@
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import FileExtensionValidator
 from django.db import models
+from django.utils.crypto import get_random_string
 
 
 # Create your models here.
@@ -25,6 +27,8 @@ class User(AbstractUser):
         return self.full_name()
 
 
+def get_name_file(instance, filename):
+    return '/'.join([get_random_string(length=5) + '_' + filename])
 class Product(models.Model):
     name = models.CharField(max_length=254, verbose_name='Имя', blank=False)
     date = models.DateTimeField(verbose_name='Дата добавления', auto_now_add=True)
