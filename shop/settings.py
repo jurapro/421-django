@@ -121,3 +121,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'files')
 # MEDIA_ROOT = BASE_DIR / 'files'
 
 MEDIA_URL = '/files/'
+
+AUTH_USER_MODEL = 'demo.User'
